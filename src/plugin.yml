@@ -1,0 +1,5 @@
+name: DynamicWords
+version: 1.0
+author: Slendy
+main: com.slendy.dynamicwords.Core
+description: Write text in the sky
