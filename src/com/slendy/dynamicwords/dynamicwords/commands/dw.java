@@ -79,9 +79,6 @@ public class dw extends Command {
                     TextUtil.yawToFace(player.getLocation().getYaw()), TextUtil.TextAlign.CENTER, 0), 0);
             player.sendMessage(Core.main("DW", "Successfully wrote text."));
         }
-//        if (args.length == 1 && args[0].equalsIgnoreCase("debug") && player.getName().equalsIgnoreCase("Slendy")) {
-//
-//        }
         if (args.length == 2 && args[0].equalsIgnoreCase("tp")) {
             DynamicWordList dw = DynamicWords.getInstance().getWords().get(args[1]);
             if (dw == null) {
@@ -104,15 +101,12 @@ public class dw extends Command {
             player.sendMessage(Core.value("Current Page", String.valueOf(dw.getCurrentPage()+1)));
             if(dw.getWordMap().size() > 1)
             player.sendMessage(Core.value("Change Interval", String.valueOf(dw.getInterval())));
-//            player.sendMessage(Core.value("Pages", ""));
                 for (int i = 0; i < dw.getWordMap().size(); i++) {
                     DynamicWord w = dw.getWordMap().get(i);
                     player.sendMessage(Core.value("  Page §e" + String.valueOf(i+1) + "§f", ""));
                     player.sendMessage("    " + Core.value("Total Lines", String.valueOf(w.getWordMap().size())));
                     for (DynamicLine l : w.getWordMap().values()) {
                         player.sendMessage("      " + Core.value("Line §e" + ((int)Core.getKeyFromValue(w.getWordMap(), l)+1) + "§f", l.getText()));
-
-//                        player.sendMessage("Page " + i + ", Line " + l.getLine() + ", Align " + l.getAlign() + ": " + l.getText());
                     }
                 }
             }
@@ -178,8 +172,6 @@ public class dw extends Command {
             player.sendMessage(Core.main("TIP", "When you are writing text face the direction where you want the text to be readable from"));
 
         }
-        //dw setline <name> <pg nm> <line> <string>
-        //dw addline <name> <pg nm> <string>
 
         if (args.length == 3 && (args[0].equalsIgnoreCase("removepage") || args[0].equalsIgnoreCase("deletepage"))) {//dw removepage <name> <pg>
             DynamicWordList dw = DynamicWords.getInstance().getWords().get(args[1]);
@@ -317,9 +309,7 @@ public class dw extends Command {
             Material m = player.getItemInHand().getType();
 
             if (m == null || m == Material.AIR || !player.getItemInHand().getType().isBlock()) {
-//                    player.sendMessage("The material cannot be air");
                 changeMaterial = false;
-//                    return;
             }
             byte b = player.getItemInHand().getData().getData();
             String text = getFinalArg(args, 3);
@@ -371,9 +361,7 @@ public class dw extends Command {
             Material m = player.getItemInHand().getType();
 
             if (m == null || m == Material.AIR || !player.getItemInHand().getType().isBlock()) {
-//                    player.sendMessage("The material cannot be air");
                 changeMaterial = false;
-//                    return;
             }
             byte b = player.getItemInHand().getData().getData();
             String text = getFinalArg(args, 4);

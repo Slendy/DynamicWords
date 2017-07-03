@@ -41,27 +41,6 @@ public class CommandHandler implements Listener {
     {
         Command command = new dw();
         addCommand(command);
-//        Class<?>[] classes = ClassEnumerator.getInstance().getClassesFromThisJar(
-//                Plugin);
-//        if (classes == null || classes.length == 0)
-//        {
-//            return;
-//        }
-//        for (Class<?> c : classes)
-//        {
-//            try
-//            {
-//                if (Command.class.isAssignableFrom(c) && (!(c.equals(Command.class))))
-//                {
-//                    Command command = (Command) c.newInstance();
-//                    Core.that.getLogger().log(Level.INFO, "Registered Command: " + command.executor());
-////                        System.out.println("Found class: " + c.getSimpleName());
-//                    addCommand(command);
-//                }
-//            } catch (IllegalAccessException | InstantiationException e) {
-//                e.printStackTrace();
-//            }
-//        }
     }
 
     private static CommandHandler Instance;
@@ -80,7 +59,6 @@ public class CommandHandler implements Listener {
         Plugin = plugin;
         Commands = new HashMap<>();
         MainCommands = new HashMap<>();
-//        addCommands();
         registerCommands();
         plugin.getServer().getPluginManager().registerEvents(this, plugin);
     }
@@ -184,20 +162,7 @@ public class CommandHandler implements Listener {
         for(String commandRoot : command.aliases()){
             Commands.put(commandRoot.toLowerCase(), command);
         }
-
-//        Commands.put(command.executor().toLowerCase(), command);
     }
-
-//    public <T extends Command> addCommand(Command command){
-//        aliveCheck("addCommand(Command)");
-//        MainCommands.put(command.executor(), command);
-//
-//        for(String commandRoot : command.aliases()){
-//            Commands.put(commandRoot.toLowerCase(), command);
-//        }
-//
-////        Commands.put(command.executor().toLowerCase(), command);
-//    }
 
     public CommandHandler removeCommand(Command command){
         aliveCheck("removeCommand(Command)");
@@ -219,38 +184,6 @@ public class CommandHandler implements Listener {
     {
         if (Instance == null)
             throw new UnsupportedOperationException("There is no instance of CommandHandler. Method: " + method);
-    }
-
-    @EventHandler(ignoreCancelled = true, priority = EventPriority.MONITOR)
-    public void handleConsoleCommands(ServerCommandEvent event){
-        CommandSender sender = event.getSender();
-        String _commandRaw =  event.getCommand().toLowerCase();
-        String[] _args = null;
-        if(_commandRaw.contains(" "))
-        {
-            _commandRaw = _commandRaw.split(" ")[0];
-            _args = event.getCommand().substring(event.getCommand().indexOf(' ') + 1).split(" ");
-        }
-        if(_args == null) _args = new String[0];
-
-        if(Commands.containsKey(_commandRaw))
-        {
-            event.setCancelled(true);
-            Command command = Commands.get(_commandRaw);
-            if(command.console()) {
-                final String[] _argsFinal = _args;
-
-                if (!command.async()) {
-                    command.execute((Player) sender, _args);
-                } else {
-                    doAsync(() -> {
-                        command.execute((Player) sender, _argsFinal);
-                    });
-                }
-            } else {
-                sender.sendMessage("§cOnly players can use this command.");
-            }
-        }
     }
 
     @EventHandler(ignoreCancelled = true, priority = EventPriority.MONITOR)
@@ -282,41 +215,10 @@ public class CommandHandler implements Listener {
                 }
             final String[] argsFinal = _args;
             if(!_command.async()) {
-//                try {
                 _command.execute(_player, argsFinal);
-//                }catch(CustomException e) {
-//                    e.printStackTrace();
-//                    if (Core.that.GetStorage().getConfig().get(_player.getUniqueId().toString() + ".stackTraces") == null || !Core.that.GetStorage().getConfig().getBoolean(_player.getUniqueId().toString() + ".stackTraces")) {
-//                        _player.sendMessage(Core.main("Core", "An exception has occurred. Please contact the server administrators if the error persists."));
-//                    } else if(Core.that.GetStorage().getConfig().get(_player.getUniqueId().toString() + ".stackTraces") != null && Core.that.GetStorage().getConfig().getBoolean(_player.getUniqueId().toString() + ".stackTraces")) {
-//                        _player.sendMessage("§4§k0§r §c§lSTACK TRACE §4§k0");
-//                        _player.sendMessage("§o"  + Core.getRootCause(e).getMessage());
-//
-//                        _player.sendMessage("");
-//
-//                        int i = 0;
-//                        for(StackTraceElement el : Core.getRootCause(e).getStackTrace()){
-//                            _player.sendMessage(el.getClassName() + "." + el.getMethodName() + "(" + el.getFileName() + ":" + el.getLineNumber() + ")");
-//                            i++;
-//                            if(i==2)
-//                                break;
-//                        }
-//                        _player.sendMessage("§4§k0§r §c§lEND OF STACK TRACE §4§k0");
-//                    }
-//                }
             }else{
-
                 doAsync(() ->{
-//                        try {
                     _command.execute(_player, argsFinal);
-//                        }catch(CustomException e) {
-//                            if (!_player.getName().equalsIgnoreCase("Slendy")) {
-//                                _player.sendMessage(Core.main("Core", "An exception has occurred."));
-//                                _player.sendMessage(Core.mBody + "Please contact the server administrators if you believe that this is in error.");
-//                            } else {
-//                                _player.sendMessage(Arrays.toString(e.getStackTrace()) + "");
-//                            }
-//                        }
                 });
 
 

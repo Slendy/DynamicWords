@@ -1,14 +1,5 @@
 package com.slendy.dynamicwords.dynamicwords;
 
-//import me.slendy.Core;
-//import me.slendy.TextUtil;
-//import me.slendy.util.UpdateEvent;
-//import me.slendy.util.UpdateType;
-//import me.slendy.util.UtilTime;
-//import me.slendy.util.dynamicwords.utils.DynamicLine;
-//import me.slendy.util.dynamicwords.utils.DynamicWord;
-//import me.slendy.util.dynamicwords.utils.DynamicWordList;
-//import me.slendy.util.prefs.YamlStorage;
 import com.slendy.dynamicwords.Core;
 import com.slendy.dynamicwords.dynamicwords.update.UpdateEvent;
 import com.slendy.dynamicwords.dynamicwords.update.UpdateType;
@@ -106,42 +97,10 @@ public class DynamicWords implements Listener {
                     wordMap.put(i, w);
                 }
             words.put(name, new DynamicWordList(wordMap, interval));
-//            for(DynamicWordList dwl : words.values()){
-//                player.sendMessage("Name: " + Core.getKeyFromValue(words, dwl));
-//                player.sendMessage("Change Interval: " + dwl.getInterval());
-//                player.sendMessage("Last auto change: " + dwl.getLastChange());
-//                player.sendMessage("Current page: " + dwl.getCurrentPage());
-//                player.sendMessage("Total pages: " + dwl.getWordMap().size());
-//                player.sendMessage("Listing pages;");
-//                for(int i = 0; i < dwl.getWordMap().size(); i++){
-//                    DynamicWord w1 = dwl.getWordMap().get(i);
-//                    for(DynamicLine l : w1.getWordMap().values()){
-//                        player.sendMessage("Page " + i + ", Line " + l.getLine() + ", Align " + l.getAlign() + ": " + l.getText());
-//                    }
-//                }
-//            }
 
         }
         _words = words;
     }
-
-
-//    public void saveAlts(){
-//        try{
-//            JsonObject json = new JsonObject();
-//
-//            for(DynamicWordList dwl : _words.values()){
-//                String name = (String)Core.getKeyFromValue(_words, dwl);)
-//
-//                dynamicWordList.addProperty("name", name);
-//                dynamicWordList.addProperty("interval", dwl.getInterval());
-//
-//                json.add(dynamicWordList);
-//            }
-//        }catch(Exception e){
-//            e.printStackTrace();;
-//        }
-//    }
 
 
 
